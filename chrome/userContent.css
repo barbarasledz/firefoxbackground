@@ -1,4 +1,16 @@
-@-moz-document url(about:home), url(about:newtab), url(about:privatebrowsing) {
+/* 
+### GLOBAL VARIABLES ###
+Use the following variables to control the images that appear as the backgrounds. 
+*/
+:root {
+    --home-image-url: url("img/valhalla.jpeg"); /* Controls the "Home" page when you first start Firefox */
+    --newtab-image-url: url("img/fireworks.jpg"); /* Controls new tabs */
+    --private-image-url: url("img/purple-flowers.jpg"); /* Controls homepage and all tabs when in Private Browsing mode */
+    --logo-image-url: url("img/firefox.png") /* Controls the logo image, if enabled in the code below. See "LOGO CUSTOMIZATION" for instructions */
+}
+
+/* The code below handles the display of the custom image on the Firefox homepage. You shouldn't need to modify this. */
+@-moz-document url(about:home) {
     .click-target-container *, .top-sites-list * {
         color: #fff !important ;
         text-shadow: 2px 2px 2px #222 !important ;
@@ -9,10 +21,60 @@
         position: fixed ;
         top: 0 ;
         left: 0 ;
-        background: #f9a no-repeat url(img/valhalla.jpeg) center ;
+        background: #f9a no-repeat var(--home-image-url) center ;
         background-size: cover ;
         width: 100vw ;
         height: 100vh ;
     }
-    .logo  {background-image: url(img/firefox.png) !important; }
 }
+
+/* The code below handles the display of the custom image on new tabs.  You shouldn't need to modify this. */
+@-moz-document url(about:newtab) {
+    .click-target-container *, .top-sites-list * {
+        color: #fff !important ;
+        text-shadow: 2px 2px 2px #222 !important ;
+    }
+    body::before {
+        content: "" ;
+        z-index: -1 ;
+        position: fixed ;
+        top: 0 ;
+        left: 0 ;
+        background: #f9a no-repeat var(--newtab-image-url) center ;
+        background-size: cover ;
+        width: 100vw ;
+        height: 100vh ;
+    }
+}
+
+/* The code belows handles the display of the custom image in private browsing.  You shouldn't need to modify this. */
+@-moz-document url(about:privatebrowsing) {
+    .click-target-container *, .top-sites-list * {
+        color: #fff !important ;
+        text-shadow: 2px 2px 2px #222 !important ;
+    }
+    body::before {
+        content: "" ;
+        z-index: -1 ;
+        position: fixed ;
+        top: 0 ;
+        left: 0 ;
+        background: #f9a no-repeat var(--private-image-url) center ;
+        background-size: cover ;
+        width: 100vw ;
+        height: 100vh ;
+    }
+}
+
+/* 
+### LOGO CUSTOMIZATION ###
+Uncomment the code below if you'd like to change the firefox logo to use the image url in :root.
+*/
+
+/*
+@-moz-document url(about:home), url(about:newtab), url(about:privatebrowsing) {
+    .logo  {
+        background-image: url(img/firefox.png) !important; 
+    }
+}
+*/
